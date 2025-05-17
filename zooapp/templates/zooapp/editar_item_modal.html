@@ -1,0 +1,42 @@
+<form id="editForm" method="post" action="{% url 'editar_item' item.id %}" class="modal-form">
+  {% csrf_token %}
+  <span class="close-btn">&times;</span>
+  <h2>Editar Item</h2>
+
+  <label for="nome">Nome:</label>
+  <input type="text" id="nome" name="nome" value="{{ item.nome }}" required>
+
+  <label for="especime">Espécime:</label>
+  <input type="text" id="especime" name="especime" value="{{ item.especime }}" required>
+
+  <label for="data_coleta">Data de Coleta:</label>
+  <input type="date" id="data_coleta" name="data_coleta" value="{{ item.data_coleta }}" required>
+
+  <button type="submit" class="btn btn-salvar">Salvar</button>
+</form>
+
+<script>
+  const form = document.getElementById('editForm');
+  form.addEventListener('submit', async function (event) {
+    event.preventDefault();
+
+    const url = form.action;
+    const formData = new FormData(form);
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+      body: formData
+    });
+
+    if (response.ok) {
+      // Fecha modal e atualiza página ou lista para refletir alteração
+      document.getElementById('editModal').style.display = 'none';
+      location.reload();  // ou atualize só o item na lista via JS
+    } else {
+      alert('Erro ao salvar o item.');
+    }
+  });
+</script>

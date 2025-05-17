@@ -232,7 +232,6 @@ body {
   margin-left: 60px;
 }
 
-
 /* FORMULÁRIO */
 .item-form {
   max-width: 600px;
@@ -311,6 +310,174 @@ body {
 body.dark-mode .page-title {
   color: #e0e0e0;
   /* Cor para modo escuro */
+}
+
+/* LISTAGEM DE ITENS COMO RELATÓRIO */
+.item-list {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.item-list th,
+.item-list td {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.item-list th {
+  background-color: #f4f4f4;
+  color: #333;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.item-list tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* Alinhamento dos botões */
+.buttons-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+/* Estilos do botão "Importar Excel" */
+.btn-importar {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.btn-importar:hover {
+  background-color: #45a049;
+  /* Efeito de hover mais escuro */
+}
+
+.btn-importar:active {
+  background-color: #388e3c;
+  /* Efeito de clique */
+}
+
+/* Estilos do botão "Exportar para Excel" */
+.btn-exportar {
+  padding: 10px 20px;
+  background-color: #2196F3;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.btn-exportar:hover {
+  background-color: #0b7dda;
+  /* Efeito de hover mais escuro */
+}
+
+.btn-exportar:active {
+  background-color: #064d9e;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.btn-excluir:hover {
+  background-color: #d32f2f;
+  /* Efeito de hover mais escuro */
+}
+
+.btn-excluir:active {
+  background-color: #9a1b1b;
+  /* Efeito de clique */
+}
+
+/* Modal para exclusão */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1500;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px 30px;
+  border-radius: 8px;
+  width: 350px;
+  max-width: 90%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.modal-content p {
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: #333;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.modal-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.modal-buttons .confirm {
+  background-color: #f44336;
+  color: white;
+}
+
+.modal-buttons .cancel {
+  background-color: #ccc;
+  color: #333;
+}
+
+/* INPUT CHECKBOX */
+.checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.checkbox:checked {
+  background-color: #4CAF50;
 }
 
 /* MENSAGENS */
