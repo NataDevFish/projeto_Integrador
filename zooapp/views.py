@@ -17,8 +17,9 @@ ITENS_FAKE = [
         "nome": "Pinguim",
         "especime": "Aptenodytes forsteri",
         "data_coleta": "2024-01-15",
-},
+    },
 ]
+
 
 def home(request):
     return render(request, "home.html")
@@ -48,6 +49,7 @@ def adicionar_item(request):
 
     return render(request, "adicionar_item.html")
 
+
 def editar_item(request, id):
     item = next((i for i in ITENS_FAKE if i["id"] == id), None)
     if not item:
@@ -70,3 +72,7 @@ def excluir_item(request, id):
         return redirect("listar_itens")
     return HttpResponse("Método não permitido", status=405)
 
+
+# Página de perfil do usuário
+def perfil_view(request):
+    return render(request, "perfil.html")

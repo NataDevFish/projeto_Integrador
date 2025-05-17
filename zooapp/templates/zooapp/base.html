@@ -36,7 +36,14 @@
         <div class="icons">
             <i id="darkModeToggle" class="fas fa-moon"></i>
             <i class="fas fa-bell"></i>
-            <i class="fas fa-user"></i>
+            <div class="profile-container">
+                <i id="profile-icon" class="fas fa-user"></i>
+                <div class="profile-menu" id="profile-menu">
+                    <a href="{% url 'perfil' %}" class="profile-menu-item">
+                        <i class="fas fa-user-circle"></i> Visualizar Perfil
+                    </a>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -49,42 +56,42 @@
         const sidebar = document.getElementById('sidebar');
         const darkModeToggle = document.getElementById('darkModeToggle');
         const body = document.body;
+        const profileIcon = document.getElementById('profile-icon');
+        const profileMenu = document.getElementById('profile-menu');
 
+        // dark mode
         const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            body.classList.add('dark-mode');
-            darkModeToggle.classList.replace('fa-moon', 'fa-sun');
-        } else {
-            body.classList.remove('dark-mode');
-            darkModeToggle.classList.replace('fa-sun', 'fa-moon');
-        }
+        const isDark = savedTheme === 'dark';
+        body.classList.toggle('dark-mode', isDark);
+        darkModeToggle.classList.replace(isDark ? 'fa-moon' : 'fa-sun', isDark ? 'fa-sun' : 'fa-moon');
 
         darkModeToggle.addEventListener('click', () => {
-            const isDarkMode = body.classList.contains('dark-mode');
-            if (isDarkMode) {
-                body.classList.remove('dark-mode');
-                localStorage.setItem('theme', 'light');
-                darkModeToggle.classList.replace('fa-sun', 'fa-moon');
-            } else {
-                body.classList.add('dark-mode');
-                localStorage.setItem('theme', 'dark');
-                darkModeToggle.classList.replace('fa-moon', 'fa-sun');
-            }
+            const isDarkMode = body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            darkModeToggle.classList.replace(isDarkMode ? 'fa-moon' : 'fa-sun', isDarkMode ? 'fa-sun' : 'fa-moon');
         });
 
-        toggleBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('collapsed');
-        });
+        // Menu lateral
+        toggleBtn.addEventListener('click', () => sidebar.classList.toggle('collapsed'));
 
-        // FECHAR SIDEBAR AO CLICAR FORA DELA
         document.addEventListener('click', (event) => {
-            const isClickInsideSidebar = sidebar.contains(event.target);
-            const isClickOnToggleBtn = toggleBtn.contains(event.target);
-
-            if (!isClickInsideSidebar && !isClickOnToggleBtn) {
+            if (!sidebar.contains(event.target) && !toggleBtn.contains(event.target)) {
                 sidebar.classList.add('collapsed');
             }
         });
+
+        // Menu do perfil
+        profileIcon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            profileMenu.classList.toggle('show');
+        });
+
+        // Fechar menu de perfil ao clicar fora
+        document.addEventListener('click', () => {
+            profileMenu.classList.remove('show');
+        });
+
+        profileMenu.addEventListener('click', (e) => e.stopPropagation());
     </script>
 </body>
 

@@ -1,21 +1,25 @@
-<form id="editForm" method="post" action="{% url 'editar_item' item.id %}" class="modal-form">
-  {% csrf_token %}
+<div class="modal-header">
   <span class="close-btn">&times;</span>
   <h2>Editar Item</h2>
+</div>
 
-  <label for="nome">Nome:</label>
-  <input type="text" id="nome" name="nome" value="{{ item.nome }}" required>
+<form method="post" action="{% url 'editar_item' item.id %}" id="editForm">
+  {% csrf_token %}
+  <label>Nome:</label>
+  <input type="text" name="nome" value="{{ item.nome }}" required>
 
-  <label for="especime">Espécime:</label>
-  <input type="text" id="especime" name="especime" value="{{ item.especime }}" required>
+  <label>Espécime:</label>
+  <input type="text" name="especime" value="{{ item.especime }}" required>
 
-  <label for="data_coleta">Data de Coleta:</label>
-  <input type="date" id="data_coleta" name="data_coleta" value="{{ item.data_coleta }}" required>
+  <label>Data de Coleta:</label>
+  <input type="date" name="data_coleta" value="{{ item.data_coleta }}" required>
 
-  <button type="submit" class="btn btn-salvar">Salvar</button>
+  <button type="submit">Salvar</button>
 </form>
 
 <script>
+  console.log("Script carregado");
+
   const form = document.getElementById('editForm');
   form.addEventListener('submit', async function (event) {
     event.preventDefault();
@@ -32,9 +36,8 @@
     });
 
     if (response.ok) {
-      // Fecha modal e atualiza página ou lista para refletir alteração
       document.getElementById('editModal').style.display = 'none';
-      location.reload();  // ou atualize só o item na lista via JS
+      location.reload();
     } else {
       alert('Erro ao salvar o item.');
     }
